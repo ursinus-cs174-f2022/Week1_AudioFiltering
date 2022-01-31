@@ -80,22 +80,6 @@ double* getEnergy(double* x, int N, int win) {
 }
 
 /**
- * @brief Filter the audio by loudness or by consonants/vowels
- * 
- * @param x Audio samples
- * @param N Length of audio
- * @param NOut Reference to int holding length of filtered array
- * @param win Window to use when filtering
- * @param thresh Threshold to use when filtering
- * @return double* Filtered array
- */
-double* filter(double* x, int N, int* NOut, int win, double thresh) {
-  // TODO: Fill this in
-  return NULL; 
-}
-
-
-/**
  * @brief Extract the audio samples from an audio object
  * 
  * @param aobj Audio object
@@ -127,6 +111,22 @@ void copyAudioSamples(AudioFile<double>& aobj, double* samples, int N) {
     }
     aobj.setAudioBuffer(buffer);
 }
+
+/**
+ * @brief Filter the audio by loudness or by consonants/vowels
+ * 
+ * @param x Audio samples
+ * @param N Length of audio
+ * @param NOut Reference to int holding length of filtered array
+ * @param win Window to use when filtering
+ * @param thresh Threshold to use when filtering
+ * @return double* Filtered array
+ */
+double* filter(double* x, int N, int* NOut, int win, double thresh) {
+  // TODO: Fill this in
+  return NULL; 
+}
+
 
 int main(int argc, char* argv[]) {
     AudioFile<double> file;
