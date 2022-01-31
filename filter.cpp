@@ -36,8 +36,8 @@ int* getCrossings(double* x, int N, int win) {
     }
     int* crossings = new int[N];
     for (int i = 0; i < N; i++) {
-      if (i >= win/2 && i < N-win/2) {
-        crossings[i] = csum[i+win/2] - csum[i-win/2];
+      if (i >= win && i < N-win) {
+        crossings[i] = csum[i+win] - csum[i-win];
       }
       else {
         crossings[i] = 0;
@@ -65,11 +65,14 @@ double* getEnergy(double* x, int N, int win) {
     }
     double* energy = new double[N];
     for (int i = 0; i < N; i++) {
-      if (i >= win/2 && i < N-win/2) {
-        energy[i] = csum[i+win/2] - csum[i-win/2];
+      if (i >= win && i < N-win) {
+        energy[i] = (csum[i+win] - csum[i-win])/(2*win+1);
       }
       else {
         energy[i] = 0;
+      }
+      if (i > 40000 && i < 80000) {
+        printf("%g ", energy[i]);
       }
     }
     delete[] csum;
@@ -87,9 +90,10 @@ double* getEnergy(double* x, int N, int win) {
  * @return double* Filtered array
  */
 double* filter(double* x, int N, int* NOut, int win, double thresh) {
-  
-  return NULL; // TODO: This is a dummy value
+  // TODO: Fill this in
+  return NULL; 
 }
+
 
 /**
  * @brief Extract the audio samples from an audio object
@@ -131,8 +135,8 @@ int main(int argc, char* argv[]) {
     double* samples = extractAudioSamples(file, &N);
     
     int NOut;
-    double* res = filter(samples, N, &NOut, 1000, 40);
-
+    double* res;
+    // TODO: Fill in your filtering here
 
     copyAudioSamples(file, res, NOut);
     delete[] res;
