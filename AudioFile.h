@@ -1288,6 +1288,39 @@ void AudioFile<T>::reportError (std::string errorMessage)
         std::cout << errorMessage << std::endl;
 }
 
+/**
+ * @brief Extract the audio samples from an audio object
+ * 
+ * @param aobj Audio object
+ * @param N Length of samples, by reference (set as a side effect)
+ * @return double* The extracted audio samples
+ */
+double* extractAudioSamples(AudioFile<double>& aobj, int* N) {
+  *N = (int)aobj.getNumSamplesPerChannel();
+  double* ret = new double[*N];
+  for (int i = 0; i < *N; i++) {
+    ret[i] = aobj.samples[0][i];
+  }
+  return ret;
+}
+
+/**
+ * @brief Copy an array of audio samples into an audio object
+ * 
+ * @param file Audio object
+ * @param samples 
+ * @param N 
+ */
+void copyAudioSamples(AudioFile<double>& aobj, double* samples, int N) {
+    AudioFile<double>::AudioBuffer buffer;
+    buffer.resize(1);
+    buffer[0].resize(N);
+    for (size_t i = 0; i < N; i++) {
+        buffer[0][i] = samples[i];
+    }
+    aobj.setAudioBuffer(buffer);
+}
+
 #if defined (_MSC_VER)
     __pragma(warning (pop))
 #elif defined (__GNUC__)
